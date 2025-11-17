@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  xml-signer:
+    build: .
+    container_name: kotlin-xml-signer
+    ports:
+      - "8083:8080"
+    environment:
+      KEYSTORE_PATH: /app/keystore.jks
+      KEYSTORE_PASSWORD: ${KEYSTORE_PASSWORD:-changeit}
+      PORT: 8080
+    volumes:
+      - ./keystore.jks:/app/keystore.jks:ro
+    restart: unless-stopped
